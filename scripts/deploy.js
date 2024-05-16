@@ -1,3 +1,4 @@
+const { ConstructorFragment } = require("ethers");
 const { ethers, run } = require("hardhat");
 require("dotenv").config();
 
@@ -9,10 +10,19 @@ async function main() {
   }
   async function verify(contractAddress, args){ // verify the contract on etherscan.io using their API service, 
     console.log("verifying contract on etherscan...");
-    await run("verify:verify",{
+    try{
+      await run("verify:verify",{
       address: contractAddress,
-      arguments: args,
-    });
+      ConstructorArguments: args,
+    });}
+    catch(e){
+      if(e.message.toLowerCase().includes("already verified")){
+        console.log("Already Verified")
+      }
+      else{console.log(e)}
+      
+    }
+
 
   }
 main()
