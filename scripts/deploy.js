@@ -1,4 +1,4 @@
-const { ConstructorFragment } = require("ethers");
+const { ConstructorFragment, TransactionResponse } = require("ethers");
 const { ethers, run, network } = require("hardhat");
 require("dotenv").config();
 
@@ -15,6 +15,14 @@ async function main() {
       await simpleStorage.deploymentTransaction().wait(6)  // wait for some blocks to verify transaction to avoid errors
       await verify(simpleStorage.target, [])
     }
+    const currentValue = await simpleStorage.retrieve(); 
+    console.log("current value is ",Number(currentValue))
+
+    const TransactionResponse = await simpleStorage.store(10)
+    await TransactionResponse.wait(1);
+    const updatedValue = await simpleStorage.retrieve()
+    console.log("updated value is ",Number(updatedValue));
+
   }
   async function verify(contractAddress, args){ // verify the contract on etherscan.io using their API service, 
     console.log("verifying contract on etherscan...");
