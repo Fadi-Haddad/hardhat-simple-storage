@@ -19,6 +19,10 @@ module.exports = {
       accounts:[Sepolia_PRIVATE_KEY],
       chainId:11155111,
     },
+    localnode:{
+      url:"http://127.0.0.1:8545/",
+      chainId:31337,
+    }
   },
   solidity: "0.8.7",
   etherscan:{
