@@ -11,5 +11,14 @@ describe("SimpleStorage", function(){
         const contractValue = await simpleStorage.retrieve();
         const expectedValue = "0"
         assert.equal(contractValue.toString(), expectedValue);
+        // expect(contractValue.toString()).to.equal(expectedValue) // another way of running equality test
+    })
+    it("should update when we call store",async function(){
+        const valueToStore = 7;
+        const contractResponse = await simpleStorage.store(valueToStore);
+        await contractResponse.wait(1)
+        const currentValue = await simpleStorage.retrieve();
+        assert.equal(currentValue.toString(), valueToStore)
+        // expect(currentValue.toString()).to.equal(valueToStore.toString()) // another way of running equality test
     })
 })
