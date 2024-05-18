@@ -2,6 +2,7 @@ require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 // require("@nomiclabs/hardhat-etherscan");
 require("@nomicfoundation/hardhat-verify");
+require("hardhat-gas-reporter");
 
 
 const Sepolia_RPC_URL = process.env.RPC_URL
@@ -25,6 +26,9 @@ module.exports = {
     }
   },
   solidity: "0.8.7",
+  gasReporter:{
+    enabled: true
+  },
   etherscan:{
     // apikey :ETHERSCAN_API_KEY, // obtained from etherscan.io to enable programmatic contract verification
     apiKey :{
